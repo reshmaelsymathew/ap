@@ -2,14 +2,14 @@ package edu.uow.ap.roombooking.utility;
 
 import java.time.LocalDateTime;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.uow.ap.roombooking.entity.Action;
 import edu.uow.ap.roombooking.entity.ActionType;
-import edu.uow.ap.roombooking.entity.EventLog;
+import edu.uow.ap.roombooking.entity.EventLogAP;
 import edu.uow.ap.roombooking.entity.Status;
 import edu.uow.ap.roombooking.repository.EventLogRepository;
 
@@ -30,7 +30,7 @@ public class EventLogService {
                 throw new IllegalArgumentException("ActionType, Action, and Status must not be null");
             }
 
-            EventLog log = new EventLog();
+            EventLogAP log = new EventLogAP();
             log.setUserId(userId);
             log.setUsername(username);
             log.setActionType(actionType);

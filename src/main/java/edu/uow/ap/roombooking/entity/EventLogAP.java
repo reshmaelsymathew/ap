@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class EventLog {
+public class EventLogAP {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +27,9 @@ public class EventLog {
     private Status status;     // success, error
     private LocalDateTime eventDate;
     
-    public EventLog() {}
+    public EventLogAP() {}
     
-    	public EventLog(Long id, Long userId, String username, LocalDateTime loginTime, ActionType actionType,
+    	public EventLogAP(Long id, Long userId, String username, LocalDateTime loginTime, ActionType actionType,
 			Action action, Status status, LocalDateTime eventDate) {
 		super();
 		this.id = id;

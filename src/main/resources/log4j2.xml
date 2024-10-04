@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30">
+<Configuration status="WARN">
     <Appenders>
-        <!-- Console Appender for logging to console -->
+        <!-- Console appender -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <PatternLayout
+                pattern="%style{%d{ISO8601}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1}}{bright,yellow}: %msg%n%throwable" />
         </Console>
 
-        <!-- File Appender for logging to a file -->
-        <File name="FileAppender" fileName="logs/app.log" append="true">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
-        </File>
+        <!-- Rolling file appender -->
+        <RollingFile name="RollingFile"
+            fileName="./logs/spring-boot-logger-log4j2.log"
+            filePattern="./logs/spring-boot-logger-log4j2-%d{yyyy-MM-dd}-%i.log"> <!-- No .gz compression -->
+            <PatternLayout>
+                <pattern>%d %p %C{1} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+        </RollingFile>
     </Appenders>
 
     <Loggers>
-        <!-- Root logger, logs to console and file -->
         <Root level="info">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingFile" />
         </Root>
 
-        <!-- Logger for your specific package (edu.uow.ap.roombooking), logs at debug level -->
-        <Logger name="edu.uow.ap.roombooking" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="FileAppender"/>
+        <Logger name="edu.uow.lts.roombooking" level="trace">
+            <AppenderRef ref="RollingFile" />
         </Logger>
     </Loggers>
 </Configuration>
