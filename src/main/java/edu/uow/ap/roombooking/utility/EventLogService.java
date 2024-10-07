@@ -22,7 +22,7 @@ public class EventLogService {
     private EventLogRepository eventLogRepository;
 
     public void saveEventLog(Long userId, String username, ActionType actionType, Action action, Status status) {
-        logger.info("Attempting to save event log: UserId={}, Username={}, ActionType={}, Action={}, Status={}", userId, username, actionType, action, status);
+        logger.info("[AP] Attempting to save event log: UserId={}, Username={}, ActionType={}, Action={}, Status={}", userId, username, actionType, action, status);
         
         try {
             // Ensure none of the enum values are null
@@ -39,7 +39,7 @@ public class EventLogService {
             log.setEventDate(LocalDateTime.now());
 
             eventLogRepository.save(log);
-            logger.info("Event log successfully saved for UserId={}, Action={}", userId, action);
+            logger.info("[AP] Event log successfully saved for UserId={}, Action={}", userId, action);
 
         } catch (IllegalArgumentException e) {
             logger.error("Invalid input provided for EventLog: {}", e.getMessage(), e);
